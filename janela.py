@@ -1,6 +1,15 @@
 import tkinter as tk
+from tkinter import messagebox
 import pymysql
 import pymysql.cursors
+
+class Janela_autenticado():
+    def __init__(self):
+        self.root=tk.Tk()
+        self.root.title("Admin")
+        self.root.geometry("500x500")
+
+        self.root.mainloop()
 
 
 class JanelaLogin():
@@ -26,7 +35,21 @@ class JanelaLogin():
         with conexao.cursor() as cursor:
             cursor.execute("SELECT * FROM cadastros WHERE nome=%s AND senha=%s",(usuario,senha))
             resultado_login = cursor.fetchone()
-            print(resultado_login)
+            if resultado_login:
+                if resultado_login["nivel"] == 2:
+                    user_master = True
+                    autenticado=True
+                else:
+                    user_master = False
+                    autenticado = True
+                    
+        if not autenticado:
+            messagebox.showinfo("login","usuario nao atenticado")
+        else:
+            self.root.destroy()
+            if user_master:
+                Janela_autenticado()
+        
 
     def __init__(self):
         self.root=tk.Tk()
@@ -44,7 +67,7 @@ class JanelaLogin():
 
         tk.Button(text="Login",bg="green2",width=10,command=self.VerficaLogin).grid(row=3,column=1,pady=10)
         tk.Button(text="Cadastro",bg="orange2",width=10).grid(row=3,column=0,padx=10)
-        tk.Button(text="Visualizar cadasotrs",bg="white",width=15).grid(row=4,column=0,columnspan=2)
+        tk.Button(text="Visualizar cadastros",bg="white",width=15).grid(row=4,column=0,columnspan=2)
 
         self.root.mainloop()
 
