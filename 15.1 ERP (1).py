@@ -50,9 +50,6 @@ def logarCadastrar(decidir):
             if nome == linha['nome'] and senha == linha['senha']:
                 usuarioExistente = 1
 
-
-
-
         if usuarioExistente == 1:
             print('usuario ou senha ja existente')
         elif usuarioExistente == 0:

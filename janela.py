@@ -11,8 +11,29 @@ class Janela_autenticado():
 
         self.root.mainloop()
 
-
 class JanelaLogin():
+    def cadastro(self):
+        self.root=tk.Toplevel()
+        self.root.title("Cadastro")
+
+        tk.Label(self.root,text="Cadastrar Usuário").grid(row=0,column=0,columnspan=2,pady=5)
+
+        tk.Label(self.root,text="Usuario").grid(row=1,column=0)
+        self.login_cadastro = tk.Entry(self.root)
+        self.login_cadastro.grid(row=1,column=1)
+
+        tk.Label(self.root,text="Senha").grid(row=2,column=0)
+        self.senha_cadastro = tk.Entry(self.root)
+        self.senha_cadastro.grid(row=2,column=1)
+
+        tk.Label(self.root,text="Chave de segurança").grid(row=3,column=0,padx=5)
+        self.chave_seguranca = tk.Entry(self.root)
+        self.chave_seguranca.grid(row=3,column=1,padx=5,pady=5)
+
+        tk.Button(self.root,text="Cadastrar",width=10).grid(row=4,column=0,pady=20)
+
+        self.root.mainloop()
+
     def VerficaLogin(self):
         autenticado = False
         user_master = False
@@ -66,7 +87,7 @@ class JanelaLogin():
         self.senha.grid(row=2,column=1,padx=5,pady=5)
 
         tk.Button(text="Login",bg="green2",width=10,command=self.VerficaLogin).grid(row=3,column=1,pady=10)
-        tk.Button(text="Cadastro",bg="orange2",width=10).grid(row=3,column=0,padx=10)
+        tk.Button(text="Cadastro",bg="orange2",width=10,command=self.cadastro).grid(row=3,column=0,padx=10)
         tk.Button(text="Visualizar cadastros",bg="white",width=15).grid(row=4,column=0,columnspan=2)
 
         self.root.mainloop()
